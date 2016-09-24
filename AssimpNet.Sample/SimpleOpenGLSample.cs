@@ -78,8 +78,8 @@ namespace Assimp.Sample
                     Mesh mesh = m_model.Meshes[index];
                     for(int i = 0; i < mesh.VertexCount; i++)
                     {
-                        Vector3 tmp = FromVector(mesh.Vertices[i]);
-                        Vector3.Transform(ref tmp, ref trafo, out tmp);
+                        Vector4 tmp = FromVectorTo4(mesh.Vertices[i]);
+                        Vector4.Transform(ref tmp, ref trafo, out tmp);
 
                         min.X = Math.Min(min.X, tmp.X);
                         min.Y = Math.Min(min.Y, tmp.Y);
@@ -363,6 +363,16 @@ namespace Assimp.Sample
             v.X = vec.X;
             v.Y = vec.Y;
             v.Z = vec.Z;
+            return v;
+        }
+
+        private Vector4 FromVectorTo4(Vector3D vec)
+        {
+            Vector4 v;
+            v.X = vec.X;
+            v.Y = vec.Y;
+            v.Z = vec.Z;
+            v.W = 0f;
             return v;
         }
 

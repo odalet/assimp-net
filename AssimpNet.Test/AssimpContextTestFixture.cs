@@ -27,12 +27,20 @@ using System.Collections.Generic;
 using Assimp.Configs;
 using Assimp.Unmanaged;
 using NUnit.Framework;
+using System.Reflection;
 
 namespace Assimp.Test
 {
     [TestFixture]
     public class AssimpContextTestFixture
     {
+        [SetUp]
+        public void SetUp()
+        {
+            // Otherwise, VS runner won't find Assimp32.dll or Assimp64.dll
+            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        }
+
         [Test]
         public void TestExportToBlob()
         {
